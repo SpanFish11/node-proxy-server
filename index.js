@@ -16,9 +16,18 @@ app.get('/meteors', async (req, res) => {
     try {
         const response = await axios.get(`${apiUrl}/feed?start_date=${startDate}&end_date=${endDate}&api_key=${apiKey}`);
 
-        const {near_earth_objects} = response.data;
+        const meteors = Object.values(response.data.near_earth_objects)
+            .flat()
+            .map(meteor => ({
+                id: meteor.id,
+                name: meteor.name,
+                diameter: meteor.estimated_diameter.meters,
+                is_potentially_hazardous_asteroid: meteor.is_potentially_hazardous_asteroid,
+                close_approach_date_full: meteor.close_approach_data[0].close_approach_date_full,
+                relative_velocity: parseFloat(meteor.close_approach_data[0].relative_velocity.kilometers_per_second)
+            }));
 
-        res.json(near_earth_objects);
+        res.json(meteors);
     } catch (error) {
         console.error('Error fetching meteor data:', error);
 

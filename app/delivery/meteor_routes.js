@@ -11,7 +11,7 @@ meteorRouter.get('/meteors', async (req, res, next) => {
 
         const meteors = await getMeteors(date, stringToBoolean(count), stringToBoolean(wereDangerousMeteors));
 
-        res.render('meteor_data.html', meteors);
+        res.render('meteor/meteor_data.html', meteors);
     } catch (error) {
         next(new Exception(error.code, `An error occurred while fetching data: ${error.message}`));
     }

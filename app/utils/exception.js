@@ -1,8 +1,8 @@
 class Exception extends Error {
-    constructor(code, message) {
+    constructor(code, message, details = null) {
         super(message);
         this.code = code;
-        this.message = message;
+        this.details = details;
         this.name = this.constructor.name;
     }
 }

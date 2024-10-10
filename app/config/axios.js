@@ -7,7 +7,11 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(axiosRequestConfig => {
     const params = axiosRequestConfig.params || {};
-    params['api_key'] = config.apiKey;
+
+    if (axiosRequestConfig.url.startsWith('/neo')) {
+        params['api_key'] = config.apiKey;
+    }
+
     axiosRequestConfig.params = params;
 
     return axiosRequestConfig;

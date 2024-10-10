@@ -1,12 +1,10 @@
-import axios from "axios";
-import config from '../config/config.js';
+import axiosInstance from "../config/axios.js";
 
-const fetchMeteors = async () => {
-    const response = await axios.get(`${config.apiUrl}/feed`, {
+const fetchMeteors = async (startDate, endDate) => {
+    const response = await axiosInstance.get(`/neo/rest/v1/feed`, {
         params: {
-            start_date: config.startDate,
-            end_date: config.endDate,
-            api_key: config.apiKey,
+            start_date: startDate,
+            end_date: endDate,
         }
     });
 

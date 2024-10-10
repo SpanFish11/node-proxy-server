@@ -1,12 +1,15 @@
 import express from 'express';
 import getMeteors from "../useCases/fetch_meteors.js";
 import Exception from "../utils/exception.js";
+import {stringToBoolean} from "../utils/helpers.js";
 
 const meteorRouter = express.Router();
 
 meteorRouter.get('/meteors', async (req, res, next) => {
     try {
-        const meteors = await getMeteors();
+        const {date, count, wereDangerousMeteors} = req.query;
+
+        const meteors = await getMeteors(date, stringToBoolean(count), stringToBoolean(wereDangerousMeteors));
 
         res.json(meteors);
     } catch (error) {

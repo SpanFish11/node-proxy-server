@@ -1,15 +1,19 @@
 const errorHandler = (error, request, response, next) => {
-    console.error(error)
-
     const statusCode = error.code || 500;
     const message = error.message || 'Internal Server Error';
 
-    response.status(statusCode).json({
+    const body = {
         error: {
             code: statusCode,
             message: message,
         },
-    });
+    }
+
+    if (error.details) {
+        body.error.details = error.details;
+    }
+
+    response.status(statusCode).json(body);
 }
 
 

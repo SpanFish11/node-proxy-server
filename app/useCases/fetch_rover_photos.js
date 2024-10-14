@@ -1,7 +1,7 @@
-import fetchRoverPhotos from "../repository/rover_repository.js";
+import fetchRoverPhotos from '../repository/rover_repository.js'
 
 const getMarsPhotos = async (apiKey) => {
-    return await fetchRoverPhotos(1000, apiKey)
+  return await fetchRoverPhotos(1000, apiKey)
 }
 
-export default getMarsPhotos;
+export default getMarsPhotos

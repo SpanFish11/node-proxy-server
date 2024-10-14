@@ -1,32 +1,31 @@
-{% extends "layouts/default_layout.html" %}
-
-{% block title %}Rover Photos{% endblock %}
-
-{% block content %}
+{% extends "layouts/default_layout.html" %} {% block title %}Rover Photos{%
+endblock %} {% block content %}
 <div class="container">
-    <h1 class="mt-3">Hello {{ user_name }}</h1>
+  <h1 class="mt-3">Hello {{ user_name }}</h1>
 
-    <div class="row row-cols-auto g-4 mt-3">
-        {% for photo in photos %}
-        <div class="col">
-            <div class="card mb-3 h-100" style="max-width: 300px;">
-                <img src="{{ photo.img_src }}" class="card-img-top" alt="photo">
-                <div class="card-body">
-                    <h5 class="card-title">{{ photo.camera.full_name }}</h5>
-                </div>
-
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Rover: {{ photo.rover.name }}</li>
-                    <li class="list-group-item">Status: {{ photo.rover.status }}</li>
-                    <li class="list-group-item">Launch Date: {{ photo.rover.launch_date }}</li>
-                    <li class="list-group-item">Landing Date: {{ photo.rover.landing_date }}</li>
-                    <li class="list-group-item">Earth date: {{ photo.earth_date }}</li>
-                </ul>
-            </div>
+  <div class="row row-cols-auto g-4 mt-3">
+    {% for photo in photos %}
+    <div class="col">
+      <div class="card mb-3 h-100" style="max-width: 300px">
+        <img src="{{ photo.img_src }}" class="card-img-top" alt="photo" />
+        <div class="card-body">
+          <h5 class="card-title">{{ photo.camera.full_name }}</h5>
         </div>
-        {% endfor %}
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Rover: {{ photo.rover.name }}</li>
+          <li class="list-group-item">Status: {{ photo.rover.status }}</li>
+          <li class="list-group-item">
+            Launch Date: {{ photo.rover.launch_date }}
+          </li>
+          <li class="list-group-item">
+            Landing Date: {{ photo.rover.landing_date }}
+          </li>
+          <li class="list-group-item">Earth date: {{ photo.earth_date }}</li>
+        </ul>
+      </div>
     </div>
-
-
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}

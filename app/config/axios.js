@@ -1,22 +1,25 @@
-import axios from 'axios';
-import config from './config.js';
+import axios from 'axios'
+import config from './config.js'
 
 const axiosInstance = axios.create({
-    baseURL: config.apiUrl,
-});
+  baseURL: config.apiUrl
+})
 
-axiosInstance.interceptors.request.use(axiosRequestConfig => {
-    const params = axiosRequestConfig.params || {};
+axiosInstance.interceptors.request.use(
+  (axiosRequestConfig) => {
+    const params = axiosRequestConfig.params || {}
 
     if (axiosRequestConfig.url.startsWith('/neo')) {
-        params['api_key'] = config.apiKey;
+      params.api_key = config.apiKey
     }
 
-    axiosRequestConfig.params = params;
+    axiosRequestConfig.params = params
 
-    return axiosRequestConfig;
-}, error => {
-    return Promise.reject(error);
-});
+    return axiosRequestConfig
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
 
-export default axiosInstance;
+export default axiosInstance

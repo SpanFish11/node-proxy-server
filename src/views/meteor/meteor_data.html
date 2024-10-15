@@ -1,0 +1,86 @@
+{% extends "layouts/default_layout.html" %}
+
+{% block title %}Meteor Data{%endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-sm caption-top">
+        <caption>
+          <h2>List of Meteors</h2>
+          {% if element_count %}
+          <h5>Total number of meteors: {{ element_count }}</h5>
+          {% endif %}
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Meteor Name</th>
+            <th scope="col">Diameter Min (m)</th>
+            <th scope="col">Diameter Max (m)</th>
+            <th scope="col">Potentially Hazardous</th>
+            <th scope="col">Close Approach Date</th>
+            <th scope="col">Relative Velocity (km/sec)</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          {% if meteor_data|length == 0 %}
+          <tr>
+            <td colspan="7">No meteors found.</td>
+          </tr>
+          {% else %} {% for meteor in meteor_data %}
+          <tr>
+            <td>{{ meteor.id }}</td>
+            <td>{{ meteor.name }}</td>
+            <td>{{ meteor.diameter.estimated_diameter_min }}</td>
+            <td>{{ meteor.diameter.estimated_diameter_max }}</td>
+            <td>{{ meteor.is_potentially_hazardous_asteroid }}</td>
+            <td>{{ meteor.close_approach_date_full }}</td>
+            <td>{{ meteor.relative_velocity }}</td>
+          </tr>
+          {% endfor %} {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  {% if were_dangerous_meteors %}
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-sm caption-top">
+        <caption>
+          <h2>List of Dangerous Meteors</h2>
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Meteor Name</th>
+            <th scope="col">Diameter Min (m)</th>
+            <th scope="col">Diameter Max (m)</th>
+            <th scope="col">Close Approach Date</th>
+            <th scope="col">Relative Velocity (km/sec)</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          {% if were_dangerous_meteors|length == 0 %}
+          <tr>
+            <td colspan="6">No dangerous meteors found.</td>
+          </tr>
+          {% else %} {% for meteor in were_dangerous_meteors %}
+          <tr>
+            <td>{{ meteor.id }}</td>
+            <td>{{ meteor.name }}</td>
+            <td>{{ meteor.diameter.estimated_diameter_min }}</td>
+            <td>{{ meteor.diameter.estimated_diameter_max }}</td>
+            <td>{{ meteor.close_approach_date_full }}</td>
+            <td>{{ meteor.relative_velocity }}</td>
+          </tr>
+          {% endfor %} {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

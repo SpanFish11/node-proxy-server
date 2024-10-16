@@ -2,6 +2,7 @@
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
     "target": "ESNext",
+
     "lib": ["es6", "dom"],
     "types": ["reflect-metadata"],
     "experimentalDecorators": true,
@@ -15,6 +16,8 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "inlineSources": true,
+    "sourceRoot": "/"
   }
 }

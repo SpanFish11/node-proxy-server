@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/node';
+import { nodeProfilingIntegration } from '@sentry/profiling-node';
 import 'reflect-metadata';
 import express, { Express, json, urlencoded } from 'express';
 import { Server } from 'http';
@@ -23,6 +25,8 @@ class App {
     @inject(TYPES.RoverController) private readonly roverController: RoverController,
     @inject(TYPES.ErrorHandler) private readonly errorHandler: ErrorHandler
   ) {
+    this.configureSentry();
+
     this.app = express();
     this.port = Number(this.configService.get('PORT'));
   }
@@ -34,6 +38,15 @@ class App {
     });
 
     this.app.set('view engine', 'html');
+  }
+
+  configureSentry(): void {
+    Sentry.init({
+      dsn: this.configService.get('SENTRY_DSN'),
+      integrations: [nodeProfilingIntegration()],
+      tracesSampleRate: 1.0,
+      profilesSampleRate: 1.0
+    });
   }
 
   useMiddleware(): void {
@@ -52,6 +65,8 @@ class App {
   }
 
   useExceptionFilters(): void {
+    Sentry.setupExpressErrorHandler(this.app);
+
     this.app.use(this.errorHandler.catch.bind(this.errorHandler));
 
     this.app.use('*', (req, res) => {

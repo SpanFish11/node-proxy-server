@@ -1,15 +1,18 @@
 {
   "name": "proxy-server",
   "version": "1.0.0",
-  "main": "app/app.js",
-  "type": "module",
+  "main": "app/app.ts",
   "scripts": {
+    "start": "node dist/src/main.js",
+    "dev": "nodemon",
+    "build": "tsc",
+    "watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint app/",
-    "lint:fix": "eslint app/ --fix",
-    "format": "prettier --write app/",
-    "prepare": "husky",
-    "lint-staged": "lint-staged"
+    "lint": "eslint src/",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "prettier --write src/",
+    "lint-staged": "lint-staged",
+    "compile": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -21,24 +24,36 @@
   "dependencies": {
     "axios": "^1.7.7",
     "compression": "^1.7.4",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "http-status-codes": "^2.3.0",
     "joi": "^17.13.3",
     "nunjucks": "^3.2.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.12.0",
+    "@types/compression": "^1.7.5",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.5",
+    "@types/nunjucks": "^3.2.6",
     "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-n": "^17.11.1",
     "eslint-plugin-promise": "^6.6.0",
     "eslint-plugin-security": "^3.0.1",
     "globals": "^15.11.0",
     "husky": "^9.1.6",
+    "inversify": "^6.0.2",
     "lint-staged": "^15.2.10",
-    "prettier": "^3.3.3"
+    "nodemon": "^3.1.7",
+    "prettier": "^3.3.3",
+    "reflect-metadata": "^0.2.2",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.9.0"
   },
   "lint-staged": {
     "*.{js, ts}": [
